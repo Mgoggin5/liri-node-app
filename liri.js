@@ -1,13 +1,12 @@
 require("dotenv").config();
-
 var fs = require("fs");
 var request = require("request");
 var keys = require("./keys");
-var twitter = require("twitter");
-var spotify = require("spotify")
+var Twitter = require("twitter");
+var Spotify = require("node-spotify-api");
 var liriArgument = process.argv[2];
-//var spotify = new Spotify(keys.spotify);
-//var client = new Twitter(keys.twitter);
+var spotify = new Spotify(keys.spotify);
+var client = new Twitter(keys.twitter);
 
 
 switch (liriArgument) {
@@ -28,7 +27,7 @@ switch (liriArgument) {
 function movieThis() {
     var movie = process.argv[3];
     if (!movie) {
-        movie = "Mr. Nobody"
+        movie = "Mr Nobody"
     }
     params = movie
     request("http://www.omdbapi.com/?t=" + params + "&y=&plot=short&r=json&tomatoes=true", function (error, response, body) {
