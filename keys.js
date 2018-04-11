@@ -1,4 +1,4 @@
-console.log('Instructions');
+console.log('Liri Search! Try one of the following commands: spotify-this-song, my-tweets, movie-this, do-what-it-says');
 
 exports.twitter = {
   consumer_key: process.env.TWITTER_CONSUMER_KEY,

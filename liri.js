@@ -4,25 +4,42 @@ var request = require("request");
 var keys = require("./keys");
 var Twitter = require("twitter");
 var Spotify = require("node-spotify-api");
-var liriArgument = process.argv[2];
+var command = process.argv[2];
+var value = process.argv[2];
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 
-switch (liriArgument) {
-    case "my-tweets": myTweets(); break;
-    case "spoitfy-this-song": spotifyThisSong(); break;
-    case "movie-this": movieThis(); break;
-    case "do-what-it-says": doWhatItSays(); break;
+if(command === "movie-this") {
+    if(value === undefined) {
+        movieThis("Mr Nobody");
+        log();
+    } else {
+        movieThis(value);
+        log();
+    }
+} else if(command === "my-tweets") {
+    if(value === undefined) {
+        myTweets("greatcoder5");
+        log();
+    } else {
+        myTweets(value);
+        log();
+    }
+} else if(command === "spotify-this-song") {
+    if(value === undefined) {
+        spotifyThisSong("I Want It That Way");
+        log();
+    } else {
+        spotifyThisSong(value);
+        log();
+    }
+} else if(command === "do-what-it-says") {
+    doWhatItSays();
+    log();
+}
 
-    //Instructions
-    default: console.log("\r\n" + "Try typing one of the following commands after 'node liri.js' : " + "\r\n" +
-        "1. my-tweets 'any twitter name' " + "\r\n" +
-        "2. spotify-this-song 'any song name' " + "\r\n" +
-        "3. movie-this 'any movie name' " + "\r\n" +
-        "4. do-what-it-says." + "\r\n" +
-        "Be sure to put the movie or song name in quotation marks if it's more than one word.");
-};
+
 
 function movieThis() {
     var movie = process.argv[3];
