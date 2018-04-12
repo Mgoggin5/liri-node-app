@@ -72,20 +72,10 @@ function movieThis(movie) {
     });
 };
 
-// function myTweets(client) {
-//     var client = new twitter({
-//         consumer_key: keys.twitterKeys.consumer_key,
-//         consumer_secret: keys.twitterKeys.consumer_secret,
-//         access_token_key: keys.twitterKeys.access_token_key,
-//         access_token_secret: keys.twitterKeys.access_token_secret,
-//     });
 
     function myTweets(){
     var client = new Twitter(keys.twitter);
     var twitterUsername = process.argv[3];
-    // if (!twitterUsername) {
-    //     twitterUsername = "greatcoder5";
-    // }
     value = { twitterUsername: "greatcoder5" };
     client.get("statuses/user_timeline", value, function (error, data, response) {
         if (!error) {
