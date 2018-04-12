@@ -5,52 +5,52 @@ var keys = require("./keys");
 var Twitter = require("twitter");
 var Spotify = require("node-spotify-api");
 var command = process.argv[2];
-var value = process.argv[2];
+var value = process.argv[3];
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
 
-if(command === "movie-this") {
-    if(value === undefined) {
-        movieThis("Mr Nobody");
+if (command === "movie-this") {
+    if (value === undefined) {
+        movieThis("Mr. Nobody");
         log();
     } else {
         movieThis(value);
         log();
     }
-} else if(command === "my-tweets") {
-    if(value === undefined) {
+} else if (command === "my-tweets") {
+    if (value === undefined) {
         myTweets("greatcoder5");
         log();
     } else {
         myTweets(value);
         log();
     }
-} else if(command === "spotify-this-song") {
-    if(value === undefined) {
+} else if (command === "spotify-this-song") {
+    if (value === undefined) {
         spotifyThisSong("I Want It That Way");
         log();
     } else {
         spotifyThisSong(value);
         log();
     }
-} else if(command === "do-what-it-says") {
+} else if (command === "do-what-it-says") {
     doWhatItSays();
     log();
 }
 
 
 
-function movieThis() {
+function movieThis(movie) {
     var movie = process.argv[3];
-    if (!movie) {
-        movie = "Mr Nobody"
-    }
-    params = movie
-    request("http://www.omdbapi.com/?t=" + params + "&y=&plot=short&r=json&tomatoes=true", function (error, response, body) {
+    // if (!movie) {
+    //     movie = "Mr Nobody"
+    // }
+    value = movie
+    request("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var movieObject = JSON.parse(body);
-            //console.log(movieObject); 
+            console.log(movieObject); 
             var movieResults =
                 "------------------------------ begin ------------------------------" + "\r\n"
             "Title: " + movieObject.Title + "\r\n" +
@@ -72,7 +72,7 @@ function movieThis() {
     });
 };
 
-function myTweets() {
+function myTweets(client) {
     var client = new twitter({
         consumer_key: keys.twitterKeys.consumer_key,
         consumer_secret: keys.twitterKeys.consumer_secret,
