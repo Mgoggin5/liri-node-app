@@ -43,9 +43,9 @@ if (command === "movie-this") {
 
 function movieThis(movie) {
     var movie = process.argv[3];
-    // if (!movie) {
-    //     movie = "Mr Nobody"
-    // }
+    if (!movie) {
+        movie = "Mr Nobody"
+    }
     value = movie
     request("http://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy", function (error, response, body) {
         if (!error && response.statusCode == 200) {
